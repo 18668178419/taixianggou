@@ -1,0 +1,7 @@
+<view class="container">
+  <view class="empty">
+    <text>这里是收藏页面，占位文件用于修复缺少 wxml 报错。</text>
+  </view>
+</view>
+
+

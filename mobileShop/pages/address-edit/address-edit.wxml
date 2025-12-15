@@ -1,0 +1,31 @@
+<view class="container">
+  <view class="form-item">
+    <text class="label">收货人</text>
+    <input class="input" placeholder="请输入收货人姓名" value="{{name}}" bindinput="onInputChange" data-field="name" />
+  </view>
+  <view class="form-item">
+    <text class="label">手机号码</text>
+    <input class="input" placeholder="请输入手机号码" value="{{phone}}" bindinput="onInputChange" data-field="phone" />
+  </view>
+  <view class="form-item">
+    <text class="label">省市区</text>
+    <picker mode="region" value="{{region}}" bindchange="onRegionChange">
+      <view class="picker-value {{regionText ? '' : 'placeholder'}}">
+        {{regionText || '请选择省市区'}}
+      </view>
+    </picker>
+  </view>
+  <view class="form-item">
+    <text class="label">详细地址</text>
+    <input class="input" placeholder="如：XX小区1号楼101室" value="{{detail}}" bindinput="onInputChange" data-field="detail" />
+  </view>
+
+  <view class="form-item row">
+    <text class="label">设为默认地址</text>
+    <switch checked="{{isDefault}}" bindchange="onDefaultChange" />
+  </view>
+
+  <button class="btn-save" bindtap="onSaveTap">保存</button>
+</view>
+
+

@@ -1,0 +1,20 @@
+<view class="container">
+  <view wx:if="{{list.length === 0}}" class="empty">
+    <text class="empty-text">还没有收藏任何商品~</text>
+  </view>
+
+  <scroll-view scroll-y class="list">
+    <view class="item" wx:for="{{list}}" wx:key="id">
+      <image class="thumb" src="{{item.goodsImage}}" mode="aspectFill" bindtap="onGoodsTap" data-goods-id="{{item.goodsId}}" />
+      <view class="info" bindtap="onGoodsTap" data-goods-id="{{item.goodsId}}">
+        <text class="title">{{item.goodsName}}</text>
+        <text class="price">¥{{item.goodsPrice}}</text>
+      </view>
+      <view class="actions">
+        <button class="btn-unfav" bindtap="onUnfavoriteTap" data-id="{{item.id}}">取消收藏</button>
+      </view>
+    </view>
+  </scroll-view>
+</view>
+
+

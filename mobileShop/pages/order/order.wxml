@@ -1,0 +1,74 @@
+<!--pages/order/order.wxml-->
+<view class="container">
+  <!-- 收货地址 -->
+  <view class="address-section" bindtap="onAddressTap">
+    <view class="address-content" wx:if="{{address}}">
+      <view class="address-info">
+        <text class="address-name">{{address.name}}</text>
+        <text class="address-phone">{{address.phone}}</text>
+      </view>
+      <text class="address-detail">{{address.detail}}</text>
+    </view>
+    <view class="address-empty" wx:else>
+      <text>请选择收货地址</text>
+      <text class="address-arrow">></text>
+    </view>
+  </view>
+
+  <!-- 商品列表 -->
+  <view class="goods-section">
+    <view class="order-item" wx:for="{{orderItems}}" wx:key="id">
+      <image class="order-item-image" src="{{item.image}}" mode="aspectFill"></image>
+      <view class="order-item-info">
+        <text class="order-item-name">{{item.name}}</text>
+        <text class="order-item-specs">{{item.specs}}</text>
+        <view class="order-item-bottom">
+          <view class="order-item-price-box">
+            <text class="price price-symbol">¥</text>
+            <text class="price price-integer">{{item.price}}</text>
+          </view>
+          <text class="order-item-count">x{{item.count}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 订单信息 -->
+  <view class="info-section">
+    <view class="info-item">
+      <text class="info-label">配送方式</text>
+      <text class="info-value">快递配送</text>
+    </view>
+    <view class="info-item">
+      <text class="info-label">备注</text>
+      <input class="info-input" placeholder="选填，对本次购买的说明" value="{{remark}}" bindinput="onRemarkInput"/>
+    </view>
+  </view>
+
+  <!-- 价格明细 -->
+  <view class="price-section">
+    <view class="price-item">
+      <text class="price-label">商品总价</text>
+      <text class="price-value">¥{{totalPrice}}</text>
+    </view>
+    <view class="price-item">
+      <text class="price-label">运费</text>
+      <text class="price-value">¥{{shippingFee}}</text>
+    </view>
+    <view class="price-item total">
+      <text class="price-label">实付</text>
+      <text class="price-value">¥{{finalPrice}}</text>
+    </view>
+  </view>
+
+  <!-- 底部提交栏 -->
+  <view class="bottom-bar">
+    <view class="bar-total">
+      <text class="bar-total-label">合计：</text>
+      <text class="price price-symbol">¥</text>
+      <text class="price price-integer">{{finalPrice}}</text>
+    </view>
+    <view class="bar-btn" bindtap="onSubmit">提交订单</view>
+  </view>
+</view>
+

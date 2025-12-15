@@ -1,0 +1,38 @@
+<!--pages/category/category.wxml-->
+<view class="container">
+  <view class="category-container">
+    <!-- 左侧分类列表 -->
+    <scroll-view class="category-sidebar" scroll-y="{{true}}">
+      <view class="category-sidebar-item {{currentCategoryId === item.id ? 'active' : ''}}" 
+            wx:for="{{categories}}" 
+            wx:key="id"
+            bindtap="onCategorySelect" 
+            data-id="{{item.id}}">
+        <text>{{item.name}}</text>
+      </view>
+    </scroll-view>
+
+    <!-- 右侧商品列表 -->
+    <scroll-view class="category-content" scroll-y="{{true}}">
+      <view class="category-banner" wx:if="{{currentCategory}}">
+        <image class="category-banner-image" src="{{currentCategory.image}}" mode="aspectFill"></image>
+        <text class="category-banner-title">{{currentCategory.name}}</text>
+      </view>
+      <view class="goods-list">
+        <view class="goods-item" wx:for="{{goodsList}}" wx:key="id" bindtap="onGoodsTap" data-id="{{item.id}}">
+          <image class="goods-image" src="{{item.image}}" mode="aspectFill"></image>
+          <view class="goods-info">
+            <text class="goods-name">{{item.name}}</text>
+            <view class="goods-price-box">
+              <text class="price price-symbol">¥</text>
+              <text class="price price-integer">{{item.price}}</text>
+              <text class="original-price" wx:if="{{item.originalPrice > item.price}}">¥{{item.originalPrice}}</text>
+            </view>
+            <text class="goods-sales">已售{{item.sales}}</text>
+          </view>
+        </view>
+      </view>
+    </scroll-view>
+  </view>
+</view>
+

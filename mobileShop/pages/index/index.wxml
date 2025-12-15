@@ -1,0 +1,74 @@
+<!--pages/index/index.wxml-->
+<view class="container">
+  <!-- 搜索栏 -->
+  <view class="search-bar">
+    <view class="search-box" bindtap="onSearchTap">
+      <text class="search-icon">🔍</text>
+      <text class="search-placeholder">搜索商品</text>
+    </view>
+  </view>
+
+  <!-- 轮播图 -->
+  <swiper class="banner-swiper" indicator-dots="{{true}}" autoplay="{{true}}" interval="{{3000}}" duration="{{500}}" circular="{{true}}">
+    <swiper-item wx:for="{{banners}}" wx:key="id">
+      <image class="banner-image" src="{{item.image}}" mode="aspectFill" bindtap="onBannerTap" data-id="{{item.id}}"></image>
+    </swiper-item>
+  </swiper>
+
+  <!-- 分类导航 -->
+  <view class="category-nav">
+    <view class="category-item" wx:for="{{categories}}" wx:key="id" bindtap="onCategoryTap" data-id="{{item.id}}">
+      <view class="category-icon">{{item.icon}}</view>
+      <text class="category-name">{{item.name}}</text>
+    </view>
+  </view>
+
+  <!-- 推荐商品 -->
+  <view class="section">
+    <view class="section-header">
+      <text class="section-title">🔥 热门推荐</text>
+      <text class="section-more" bindtap="onMoreTap" data-type="recommend">更多 ></text>
+    </view>
+    <scroll-view class="goods-scroll" scroll-x="{{true}}" show-scrollbar="{{false}}">
+      <view class="goods-item" wx:for="{{recommendGoods}}" wx:key="id" bindtap="onGoodsTap" data-id="{{item.id}}">
+        <image class="goods-image" src="{{item.image}}" mode="aspectFill"></image>
+        <view class="goods-info">
+          <text class="goods-name">{{item.name}}</text>
+          <view class="goods-price-box">
+            <text class="price price-symbol">¥</text>
+            <text class="price price-integer">{{item.price}}</text>
+            <text class="original-price" wx:if="{{item.originalPrice > item.price}}">¥{{item.originalPrice}}</text>
+          </view>
+          <text class="goods-sales">已售{{item.sales}}</text>
+        </view>
+      </view>
+    </scroll-view>
+  </view>
+
+  <!-- 商品列表 -->
+  <view class="section">
+    <view class="section-header">
+      <text class="section-title">🛍️ 精选好物</text>
+    </view>
+    <view class="goods-grid">
+      <view class="goods-card" wx:for="{{goodsList}}" wx:key="id" bindtap="onGoodsTap" data-id="{{item.id}}">
+        <image class="goods-card-image" src="{{item.image}}" mode="aspectFill"></image>
+        <view class="goods-card-info">
+          <text class="goods-card-name">{{item.name}}</text>
+          <view class="goods-card-tags">
+            <text class="tag" wx:for="{{item.tags}}" wx:key="*this" wx:for-item="tag">{{tag}}</text>
+          </view>
+          <view class="goods-card-price-box">
+            <view class="price-box">
+              <text class="price price-symbol">¥</text>
+              <text class="price price-integer">{{item.price}}</text>
+            </view>
+            <text class="original-price" wx:if="{{item.originalPrice > item.price}}">¥{{item.originalPrice}}</text>
+          </view>
+          <text class="goods-card-sales">已售{{item.sales}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
+

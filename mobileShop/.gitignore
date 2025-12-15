@@ -1,0 +1,24 @@
+# 微信小程序
+project.private.config.json
+
+# 操作系统
+.DS_Store
+Thumbs.db
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# 日志
+*.log
+npm-debug.log*
+
+# 依赖
+node_modules/
+
+# 临时文件
+*.tmp
+*.temp
+

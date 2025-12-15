@@ -1,0 +1,29 @@
+<view class="container">
+  <view class="header">
+    <button class="btn-add" bindtap="onAddTap">+ 新增地址</button>
+  </view>
+
+  <view wx:if="{{list.length === 0}}" class="empty">
+    <text class="empty-text">还没有添加收货地址~</text>
+  </view>
+
+  <scroll-view scroll-y class="list">
+    <view class="item" wx:for="{{list}}" wx:key="id" bindtap="onItemTap" data-item="{{item}}">
+      <view class="top">
+        <text class="name">{{item.name}}</text>
+        <text class="phone">{{item.phone}}</text>
+        <text wx:if="{{item.isDefault}}" class="tag-default">默认</text>
+      </view>
+      <view class="addr">
+        {{item.province}}{{item.city}}{{item.district}}{{item.detail}}
+      </view>
+      <view class="actions" catchtap="noop">
+        <button class="btn-small" bindtap="onEditTap" data-id="{{item.id}}">编辑</button>
+        <button class="btn-small" bindtap="onSetDefaultTap" data-id="{{item.id}}">设为默认</button>
+        <button class="btn-small btn-del" bindtap="onDeleteTap" data-id="{{item.id}}">删除</button>
+      </view>
+    </view>
+  </scroll-view>
+</view>
+
+

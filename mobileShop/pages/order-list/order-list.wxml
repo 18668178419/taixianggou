@@ -1,0 +1,43 @@
+<!--pages/order-list/order-list.wxml-->
+<view class="container">
+  <!-- 订单列表 -->
+  <view class="order-list" wx:if="{{orders.length > 0}}">
+    <view class="order-card" wx:for="{{orders}}" wx:key="id" bindtap="onOrderTap" data-id="{{item.id}}">
+      <view class="order-header">
+        <text class="order-no">订单号：{{item.orderNo}}</text>
+        <text class="order-status">{{statusText[item.status]}}</text>
+      </view>
+      <view class="order-items">
+        <view class="order-item" wx:for="{{item.items}}" wx:key="id" wx:for-item="goods">
+          <image class="order-item-image" src="{{goods.image}}" mode="aspectFill"></image>
+          <view class="order-item-info">
+            <text class="order-item-name">{{goods.name}}</text>
+            <view class="order-item-bottom">
+              <view class="order-item-price-box">
+                <text class="price price-symbol">¥</text>
+                <text class="price price-integer">{{goods.price}}</text>
+              </view>
+              <text class="order-item-count">x{{goods.count}}</text>
+            </view>
+          </view>
+        </view>
+      </view>
+      <view class="order-footer">
+        <text class="order-total">共{{item.items.length}}件商品 合计：¥{{item.finalPrice}}</text>
+        <view class="order-actions">
+          <view class="order-action-btn secondary" wx:if="{{item.status === 'unpaid'}}" bindtap="onCancelOrder" data-id="{{item.id}}" catchtap="stopPropagation">取消订单</view>
+          <view class="order-action-btn primary" wx:if="{{item.status === 'unpaid'}}" bindtap="onPayOrder" data-id="{{item.id}}" catchtap="stopPropagation">立即支付</view>
+          <view class="order-action-btn primary" wx:if="{{item.status === 'shipped'}}" bindtap="onConfirmReceive" data-id="{{item.id}}" catchtap="stopPropagation">确认收货</view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 空状态 -->
+  <view class="empty" wx:if="{{orders.length === 0}}">
+    <text class="empty-icon">📦</text>
+    <text class="empty-text">暂无订单</text>
+    <view class="empty-btn" bindtap="onGoShopping">去逛逛</view>
+  </view>
+</view>
+

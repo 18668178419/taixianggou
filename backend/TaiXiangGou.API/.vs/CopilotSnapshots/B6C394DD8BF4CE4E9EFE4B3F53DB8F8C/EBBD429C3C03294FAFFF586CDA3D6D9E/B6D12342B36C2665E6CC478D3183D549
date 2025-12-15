@@ -1,0 +1,33 @@
+﻿using SqlSugar;
+
+namespace TaiXiangGou.API.Models
+{
+    [SugarTable("order_items")]
+    public class OrderItem
+    {
+        [SugarColumn(IsPrimaryKey = true, IsIdentity = true)]
+        public long Id { get; set; }
+
+        public long OrderId { get; set; }
+
+        public int GoodsId { get; set; }
+
+        [SugarColumn(Length = 200)]
+        public string GoodsName { get; set; } = string.Empty;
+
+        [SugarColumn(Length = 500, IsNullable = true)]
+        public string? GoodsImage { get; set; }
+
+        [SugarColumn(DecimalDigits = 2)]
+        public decimal GoodsPrice { get; set; }
+
+        public int Count { get; set; }
+
+        [SugarColumn(Length = 200, IsNullable = true)]
+        public string? Specs { get; set; }
+
+        [SugarColumn(IsNullable = true)]
+        public DateTime? CreateTime { get; set; }
+    }
+}
+

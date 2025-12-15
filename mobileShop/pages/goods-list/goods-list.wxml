@@ -1,0 +1,51 @@
+<!--pages/goods-list/goods-list.wxml-->
+<view class="container">
+  <!-- 搜索栏 -->
+  <view class="search-bar">
+    <view class="search-box">
+      <text class="search-icon">🔍</text>
+      <input class="search-input" placeholder="搜索商品" value="{{keyword}}" bindinput="onSearchInput" confirm-type="search" bindconfirm="onSearchConfirm"/>
+    </view>
+  </view>
+
+  <!-- 排序栏 -->
+  <view class="sort-bar">
+    <view class="sort-item {{sortType === 'default' ? 'active' : ''}}" bindtap="onSortTap" data-type="default">
+      <text>综合</text>
+    </view>
+    <view class="sort-item {{sortType === 'sales' ? 'active' : ''}}" bindtap="onSortTap" data-type="sales">
+      <text>销量</text>
+    </view>
+    <view class="sort-item {{sortType === 'price' ? 'active' : ''}}" bindtap="onSortTap" data-type="price">
+      <text>价格</text>
+      <text class="sort-arrow" wx:if="{{sortType === 'price'}}">{{priceOrder === 'asc' ? '↑' : '↓'}}</text>
+    </view>
+  </view>
+
+  <!-- 商品列表 -->
+  <view class="goods-list">
+    <view class="goods-item" wx:for="{{goodsList}}" wx:key="id" bindtap="onGoodsTap" data-id="{{item.id}}">
+      <image class="goods-image" src="{{item.image}}" mode="aspectFill"></image>
+      <view class="goods-info">
+        <text class="goods-name">{{item.name}}</text>
+        <view class="goods-tags">
+          <text class="tag" wx:for="{{item.tags}}" wx:key="*this" wx:for-item="tag">{{tag}}</text>
+        </view>
+        <view class="goods-price-box">
+          <view class="price-box">
+            <text class="price price-symbol">¥</text>
+            <text class="price price-integer">{{item.price}}</text>
+          </view>
+          <text class="original-price" wx:if="{{item.originalPrice > item.price}}">¥{{item.originalPrice}}</text>
+        </view>
+        <text class="goods-sales">已售{{item.sales}}</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 空状态 -->
+  <view class="empty" wx:if="{{goodsList.length === 0}}">
+    <text class="empty-text">暂无商品</text>
+  </view>
+</view>
+

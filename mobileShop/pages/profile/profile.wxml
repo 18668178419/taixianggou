@@ -1,0 +1,68 @@
+<!--pages/profile/profile.wxml-->
+<view class="container">
+  <!-- 用户信息 -->
+  <view class="user-section" bindtap="onLoginTap">
+    <view class="user-avatar">
+      <image class="avatar-image" src="{{userInfo.avatarUrl || '/images/default-avatar.png'}}" mode="aspectFill"></image>
+    </view>
+    <view class="user-info">
+      <text class="user-name">{{userInfo.nickName || '点击登录'}}</text>
+      <text class="user-desc" wx:if="{{userInfo.nickName}}">欢迎来到泰享购</text>
+    </view>
+    <view class="user-setting" catchtap="onSettingTap">⚙️</view>
+  </view>
+
+  <!-- 订单统计 -->
+  <view class="order-section">
+    <view class="order-item" bindtap="onOrderTap" data-status="all">
+      <text class="order-count">{{orderCount.all || 0}}</text>
+      <text class="order-label">全部订单</text>
+    </view>
+    <view class="order-item" bindtap="onOrderTap" data-status="unpaid">
+      <text class="order-count">{{orderCount.unpaid || 0}}</text>
+      <text class="order-label">待付款</text>
+    </view>
+    <view class="order-item" bindtap="onOrderTap" data-status="unshipped">
+      <text class="order-count">{{orderCount.unshipped || 0}}</text>
+      <text class="order-label">待发货</text>
+    </view>
+    <view class="order-item" bindtap="onOrderTap" data-status="shipped">
+      <text class="order-count">{{orderCount.shipped || 0}}</text>
+      <text class="order-label">待收货</text>
+    </view>
+    <view class="order-item" bindtap="onOrderTap" data-status="completed">
+      <text class="order-count">{{orderCount.completed || 0}}</text>
+      <text class="order-label">已完成</text>
+    </view>
+  </view>
+
+  <!-- 功能菜单 -->
+  <view class="menu-section">
+    <view class="menu-item" bindtap="onAddressTap">
+      <text class="menu-icon">📍</text>
+      <text class="menu-text">收货地址</text>
+      <text class="menu-arrow">></text>
+    </view>
+    <!-- <view class="menu-item" bindtap="onCouponTap">
+      <text class="menu-icon">🎫</text>
+      <text class="menu-text">优惠券</text>
+      <text class="menu-arrow">></text>
+    </view> -->
+    <view class="menu-item" bindtap="onFavoriteTap">
+      <text class="menu-icon">❤️</text>
+      <text class="menu-text">我的收藏</text>
+      <text class="menu-arrow">></text>
+    </view>
+    <view class="menu-item" bindtap="onServiceTap">
+      <text class="menu-icon">💬</text>
+      <text class="menu-text">客服中心</text>
+      <text class="menu-arrow">></text>
+    </view>
+    <view class="menu-item" bindtap="onAboutTap">
+      <text class="menu-icon">ℹ️</text>
+      <text class="menu-text">关于我们</text>
+      <text class="menu-arrow">></text>
+    </view>
+  </view>
+</view>
+

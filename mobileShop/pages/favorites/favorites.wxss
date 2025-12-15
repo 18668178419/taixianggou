@@ -1,0 +1,15 @@
+.container {
+  min-height: 100vh;
+  background: #f7f7f7;
+  padding: 40rpx;
+  box-sizing: border-box;
+}
+
+.empty {
+  margin-top: 100rpx;
+  text-align: center;
+  color: #999;
+  font-size: 28rpx;
+}
+
+

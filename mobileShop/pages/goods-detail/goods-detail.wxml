@@ -1,0 +1,107 @@
+<!--pages/goods-detail/goods-detail.wxml-->
+<view class="container">
+  <!-- 商品图片轮播 -->
+  <swiper class="goods-swiper" indicator-dots="{{true}}" indicator-color="rgba(255,255,255,0.5)" indicator-active-color="#ff6b6b">
+    <swiper-item wx:for="{{goods.images}}" wx:key="*this">
+      <image class="goods-swiper-image" src="{{item}}" mode="aspectFill"></image>
+    </swiper-item>
+  </swiper>
+
+  <!-- 商品信息 -->
+  <view class="goods-info-section">
+    <view class="goods-price-box">
+      <view class="price-box">
+        <text class="price price-symbol">¥</text>
+        <text class="price price-integer">{{goods.price}}</text>
+      </view>
+      <text class="original-price" wx:if="{{goods.originalPrice > goods.price}}">¥{{goods.originalPrice}}</text>
+    </view>
+    <text class="goods-name">{{goods.name}}</text>
+    <view class="goods-tags">
+      <text class="tag" wx:for="{{goods.tags}}" wx:key="*this" wx:for-item="tag">{{tag}}</text>
+    </view>
+    <view class="goods-meta">
+      <text>已售{{goods.sales}}</text>
+      <text>库存{{goods.stock}}</text>
+    </view>
+  </view>
+
+  <!-- 规格选择 -->
+  <view class="spec-section" bindtap="onSpecTap">
+    <text class="spec-label">选择规格</text>
+    <text class="spec-value">{{selectedSpecsText || '请选择规格'}}</text>
+    <text class="spec-arrow">></text>
+  </view>
+
+  <!-- 商品详情 -->
+  <view class="detail-section">
+    <view class="detail-title">商品详情</view>
+    <view class="detail-content">
+      <text>{{goods.description}}</text>
+      <image class="detail-image" wx:for="{{goods.images}}" wx:key="*this" src="{{item}}" mode="widthFix"></image>
+    </view>
+  </view>
+
+  <!-- 底部操作栏 -->
+  <view class="bottom-bar">
+    <view class="bar-item" bindtap="onCartTap">
+      <text class="bar-icon">🛒</text>
+      <text class="bar-text">购物车</text>
+      <view class="cart-badge" wx:if="{{cartCount > 0}}">{{cartCount}}</view>
+    </view>
+    <view class="bar-item" bindtap="onAddCartTap">
+      <text class="bar-btn add-cart-btn">加入购物车</text>
+    </view>
+    <view class="bar-item" bindtap="onBuyNowTap">
+      <text class="bar-btn buy-now-btn">立即购买</text>
+    </view>
+  </view>
+</view>
+
+<!-- 规格选择弹窗 -->
+<view class="spec-modal {{showSpecModal ? 'show' : ''}}" bindtap="onSpecModalClose">
+  <view class="spec-modal-content" catchtap="stopPropagation">
+    <view class="spec-modal-header">
+      <image class="spec-modal-image" src="{{goods.image}}" mode="aspectFill"></image>
+      <view class="spec-modal-info">
+        <view class="spec-modal-price-box">
+          <text class="price price-symbol">¥</text>
+          <text class="price price-integer">{{goods.price}}</text>
+        </view>
+        <text class="spec-modal-stock">库存{{goods.stock}}件</text>
+      </view>
+      <text class="spec-modal-close" bindtap="onSpecModalClose">✕</text>
+    </view>
+    <scroll-view class="spec-modal-body" scroll-y="{{true}}">
+      <view class="spec-group" wx:for="{{goods.specs}}" wx:key="name">
+        <text class="spec-group-title">{{item.name}}</text>
+        <view class="spec-options">
+          <view class="spec-option {{selectedSpecs[item.name] === option ? 'active' : ''}}" 
+                wx:for="{{item.values}}" 
+                wx:for-item="option"
+                wx:key="*this"
+                bindtap="onSpecOptionTap" 
+                data-group="{{item.name}}" 
+                data-value="{{option}}">
+            <text>{{option}}</text>
+          </view>
+        </view>
+      </view>
+    </scroll-view>
+    <view class="spec-modal-footer">
+      <view class="spec-count">
+        <text class="spec-count-label">数量</text>
+        <view class="spec-count-control">
+          <text class="spec-count-btn" bindtap="onCountDecrease">-</text>
+          <text class="spec-count-value">{{count}}</text>
+          <text class="spec-count-btn" bindtap="onCountIncrease">+</text>
+        </view>
+      </view>
+      <view class="spec-modal-btns">
+        <view class="spec-modal-btn add-cart" bindtap="onConfirmAddCart">加入购物车</view>
+        <view class="spec-modal-btn buy-now" bindtap="onConfirmBuyNow">立即购买</view>
+      </view>
+    </view>
+  </view>
+</view>
+
