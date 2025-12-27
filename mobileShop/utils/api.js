@@ -1,6 +1,6 @@
 // API工具类
-const API_BASE_URL = 'http://localhost:5000/api' // 开发环境，生产环境需要修改
-//const API_BASE_URL = 'https://txgapi.zzlol.cn/api' // 开发环境，生产环境需要修改
+//const API_BASE_URL = 'http://localhost:5000/api' // 开发环境，生产环境需要修改
+const API_BASE_URL = 'https://txgapi.zzlol.cn/api' // 开发环境，生产环境需要修改
 // 将字段名首字母大写改为小写
 function toLowerCaseFirst(obj) {
   if (obj === null || obj === undefined) {

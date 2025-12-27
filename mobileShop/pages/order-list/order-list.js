@@ -27,6 +27,7 @@ Page({
     try {
       wx.showLoading({ title: '加载中...' })
       const params = {
+        userid :wx.getStorageSync('userId'),
         page: 1,
         pageSize: 100
       }

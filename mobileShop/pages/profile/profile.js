@@ -59,6 +59,7 @@ Page({
         // 调用后端登录接口
         const res = await api.login(loginRes.code, userInfo)
         
+      
         // 保存用户信息
         wx.setStorageSync('userInfo', userInfo)
         wx.setStorageSync('userId', res.id)
@@ -94,7 +95,7 @@ Page({
       desc: '用于完善用户资料',
       success: (res) => {
         const userInfo = res.userInfo
-        console.log(userInfo)
+      
         wx.setStorageSync('userInfo', userInfo)
         this.setData({ userInfo })
       },

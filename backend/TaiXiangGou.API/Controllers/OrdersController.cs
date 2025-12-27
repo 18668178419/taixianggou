@@ -23,6 +23,7 @@ namespace TaiXiangGou.API.Controllers
 
         [HttpGet]
         public async Task<IActionResult> GetList(
+            [FromQuery] int? userid = null,
             [FromQuery] string? status = null,
             [FromQuery] string? orderNo = null,
             [FromQuery] int page = 1,
@@ -34,7 +35,9 @@ namespace TaiXiangGou.API.Controllers
             {
                 query = query.Where(x => x.Status == status);
             }
-            
+
+            query = query.Where(x => x.UserId == userid);
+
             if (!string.IsNullOrEmpty(orderNo))
             {
                 query = query.Where(x => x.OrderNo.Contains(orderNo));

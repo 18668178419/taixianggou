@@ -20,6 +20,7 @@ App({
       if (loginRes.code) {
         
         const res = await api.login(loginRes.code, null)
+       
         // 后端返回：id, openid, nickName, avatarUrl...
         wx.setStorageSync('userId', res.id)
         wx.setStorageSync('openid', res.openid)
